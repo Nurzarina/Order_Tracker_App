@@ -4,16 +4,6 @@ import DisplayOrder from './displayAllOrder';
 import {Container} from 'react-bootstrap';
 
 function OrderDashboard() {
-  const [orders, setOrders] = useState([]);
-
-  useEffect(() => {
-      axios.get("http://localhost:5000/")
-        .then(res => setOrders(res.data))
-        .catch(err => console.log(err));
-  }, []);
-
-  const handleDelete = async (id) => {
-  }
 
   return (
     <Container id='pageWrapper'>
