@@ -1,21 +1,24 @@
 import React from 'react'
 import addOrder from './addOrder'
-import displayOrder from './displayOrder'
+import displayOrder from './displayAllOrder'
+import {Container} from 'react-bootstrap'
 
-function orderDashboard() {
+function OrderDashboard() {
   return (
-    <div id='pageWrapper'>
+    <Container id='pageWrapper'>
         <div> Welcome to Order Tracker App </div>
 
         <div id='addOrderDiv'>
+        Add your order here
             <addOrder />
         </div>
 
         <div id='displayOrderDiv'>
+        View or Update your orders here
             <displayOrder />
         </div>
-    </div>
+    </Container>
   )
 }
 
-export default orderDashboard
+export default OrderDashboard

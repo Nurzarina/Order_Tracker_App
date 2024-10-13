@@ -1,9 +1,9 @@
 import React from 'react'
 
-function addOrder() {
+function AddOrder() {
   return (
     <div>addOrder</div>
   )
 }
 
-export default addOrder
+export default AddOrder
