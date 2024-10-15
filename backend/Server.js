@@ -10,7 +10,7 @@ app.use(cors());
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "sLHCkPEkpNsCwRnQVVRx0dNxjRufQY"
+    password: "sLHCkPEkpNsCwRnQVVRx0dNxjRufQY",
     database: "mysqltask3"
 });
 
@@ -27,9 +27,26 @@ app.get("/allOrders", (req, res) => {
 });
 
     // Route to create new order
+app.post ("/createOrder", (req, res) => {
+    const sql = "INSERT INTO orders(status,details,additionalreq VALUES (?)";   // SQL query to insert new order
+    const values = [
+        req.body.status,
+        req.body.details,
+        req.body.additionalreq
+    ]
+    db.query(sql, [values], (err, data) => {
+        if (err) {
+            res.json(err)
+        }   else {
+            res.json(data)
+        }
+    })
+});
+
+    // Route to update details of an existing order
 
 
-    // Route to update an existing order
+    // Route to update status of an order
 
 
     // Route to delete an order
