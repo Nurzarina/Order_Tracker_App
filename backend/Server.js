@@ -50,7 +50,17 @@ app.post ("/createOrder", (req, res) => {
 
 
     // Route to delete an order
-
+app.delete("/orders/:id", (req, res) => {
+    const sql = "DELETE FROM orders WHERE id = ?";   // SQL query to delete an order
+    const id = req.params.id   // Get order ID from route parameter
+    db.query(sql, [id], (err, data) => {
+        if (err) {
+            res.json(err);  // Sed error response if query fails
+        }   else {
+            res.json(data); // Send success response with data
+        }
+    });
+});
 
     // Start the server
 app.listen(5000, () => {
