@@ -2,16 +2,17 @@ const express = require("express");
 const mysql = require("mysql");
 const cors = require("cors");
 const app = express();
+require("dotenv").config();
 
 app.use(express.json());
 app.use(cors());
 
     // Create a Mysql connection
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: PROCESS.ENV.MYSQLPASSWORD,
-    database: "orders"
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE
 });
 
     // Route to get all orders
@@ -28,7 +29,12 @@ app.get("/allOrders", (req, res) => {
 
     // Route to create new order
 app.post ("/createOrder", (req, res) => {
-    const sql = "INSERT INTO orders(status,details,additionalreq VALUES (?)";   // SQL query to insert new order
+    const { status, details, additionalreq} = req.body;
+    if (!status || !details || !additionalreq) {                                 // Validate received data
+        return res.status(400).json({ error: "All fields are required."})
+    }
+
+    const sql = "INSERT INTO orders(status,details,additionalreq) VALUES (?)";   // SQL query to insert new order
     const values = [
         req.body.status,
         req.body.details,
@@ -44,13 +50,13 @@ app.post ("/createOrder", (req, res) => {
 });
 
     // Route to update details of an existing order (only update details & additional request)
-app.put ("/update/:id", (req, res) => {
-    const sql = "UPDATE order SET `details` = ?, `additionalreq` = ?";    // SQL query to update order details
+app.put ("/updateDetails/:id", (req, res) => {
+    const sql = "UPDATE order SET `details` = ?, `additionalreq` = ? WHERE id = ?";    // SQL query to update order details
     const values = [
         req.body.details,
         req.body.additionalreq
     ]
-    const id = req.params.id
+    const id = req.params.id;
     db.query(sql, [...values, id], (err, data) => {
         if (err) {
             res.json(err);
@@ -61,12 +67,12 @@ app.put ("/update/:id", (req, res) => {
 });
 
     // Route to update status of an order
-app.put ("/update/:id", (req,res) => {
-    const sql = "UPDATE order SET `status` = ?";
+app.put ("/updateStatus/:id", (req,res) => {
+    const sql = "UPDATE order SET `status` = ? WHERE id = ?";
     const values = [
         req.body.status
     ]
-    const id = req.params.id
+    const id = req.params.id;
     db.query(sql, [...values, id], (err, data) => {
         if (err) {
             res.json(err);
