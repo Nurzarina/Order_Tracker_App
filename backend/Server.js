@@ -43,11 +43,10 @@ app.post ("/createOrder", (req, res) => {
     })
 });
 
-    // Route to update details of an existing order
+    // Route to update details of an existing order (only update details & additional request)
 app.put ("/update/:id", (req, res) => {
-    const sql = "UPDATE order SET `status` = ?, `details` = ?, `additionalreq` = ?";    // SQL query to update order details
+    const sql = "UPDATE order SET `details` = ?, `additionalreq` = ?";    // SQL query to update order details
     const values = [
-        req.body.status,
         req.body.details,
         req.body.additionalreq
     ]
