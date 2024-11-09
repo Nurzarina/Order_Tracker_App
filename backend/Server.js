@@ -61,7 +61,20 @@ app.put ("/update/:id", (req, res) => {
 });
 
     // Route to update status of an order
-
+app.put ("/update/:id", (req,res) => {
+    const sql = "UPDATE order SET `status` = ?";
+    const values = [
+        req.body.status
+    ]
+    const id = req.params.id
+    db.query(sql, [...values, id], (err, data) => {
+        if (err) {
+            res.json(err);
+        }   else {
+            res.json(data);
+        }
+    })
+});
 
     // Route to delete an order
 app.delete("/orders/:id", (req, res) => {
