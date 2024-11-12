@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, Card, Container } from 'react-bootstrap';
+import { Button, Card, Container, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function DisplayAllOrder() {
@@ -36,10 +36,42 @@ function DisplayAllOrder() {
               Add New Order
             </Button>
           </Link>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Status</th>
+                <th>Order Details</th>
+                <th>Additional Request</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                orders.map((data, i) => (
+                  <tr key={i}>
+                    <td>{data.objectID}</td>
+                    <td>{data.Status}</td>
+                    <td>{data.OrderDetails}</td>
+                    <td>{data.AdditionalRequest}</td>
+                    <td>
+                      <Link to={`updateOrderDetails/${data.id}`}>
+                      <Button variant='warning'> Update Order</Button>
+                      </Link>
+                      <Link to={`updateOrderStatus/${data.id}`}>
+                      <Button>Update Order Status</Button>
+                      </Link>
+                      <Button variant='danger' onClick={() => handleDelete(data.objectID)}>Delete Order</Button>
+                    </td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </Table>
         </Card.Body>
       </Card>
     </Container>
-  )
+  );
 }
 
 export default DisplayAllOrder
