@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import axios from 'axios';
+import { Button, Card, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function DisplayAllOrder() {
@@ -27,12 +28,12 @@ function DisplayAllOrder() {
     <Container>
       <Card>
         <Card.Header>
-          <h1>Orders</h1>
+          <h2>All Orders</h2>
         </Card.Header>
         <Card.Body>
           <Link to={"/addOrder"}>
             <Button variant='info' className='mb-3'>
-              Add Order
+              Add New Order
             </Button>
           </Link>
         </Card.Body>
