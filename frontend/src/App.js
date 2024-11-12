@@ -4,6 +4,8 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import OrderDashboard from './components/orderDashboard';
 import AddOrder from './components/addOrder';
 import DisplayAllOrder from './components/displayAllOrder';
+import updateOrderDetails from './components/updateOrderDetails';
+import updateOrderStatus from './components/updateOrderStatus';
 
 function App() {
   return (
@@ -11,8 +13,10 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<OrderDashboard />} />            
-            <Route path='/addOrder' element={<AddOrder />} />            
+            <Route path='/createOrder' element={<AddOrder />} />            
             <Route path='/allOrders' element={<DisplayAllOrder />} />            
+            <Route path='/updateOrderDetails' element={<updateOrderDetails/>} />            
+            <Route path='/updateOrderStatus' element={<updateOrderStatus/>} />            
           </Routes>
         </BrowserRouter>
     </div>

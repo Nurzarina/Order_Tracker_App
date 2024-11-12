@@ -31,7 +31,7 @@ function DisplayAllOrder() {
           <h2>All Orders</h2>
         </Card.Header>
         <Card.Body>
-          <Link to={"/addOrder"}>
+          <Link to={"/createOrder"}>
             <Button variant='info' className='mb-3'>
               Add New Order
             </Button>
