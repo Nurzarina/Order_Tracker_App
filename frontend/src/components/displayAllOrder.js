@@ -31,19 +31,14 @@ function DisplayAllOrder() {
           <h2>All Orders</h2>
         </Card.Header>
         <Card.Body>
-          <Link to={"/createOrder"}>
-            <Button variant='info' className='mb-3'>
-              Add New Order
-            </Button>
-          </Link>
-          <Table striped bordered hover>
+          <Table bordered hover variant='dark'>
             <thead>
               <tr>
                 <th>Order ID</th>
                 <th>Status</th>
                 <th>Order Details</th>
                 <th>Additional Request</th>
-                <th></th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -56,12 +51,12 @@ function DisplayAllOrder() {
                     <td>{data.additionalreq}</td>
                     <td>
                       <Link to={`updateOrderDetails/${data.id}`}>
-                      <Button variant='warning'> Update Order</Button>
+                      <Button variant='warning' className='mb-2 mt-2'> Update Order</Button>
                       </Link>
                       <Link to={`updateOrderStatus/${data.id}`}>
-                      <Button>Update Order Status</Button>
+                      <Button className='mb-2'>Update Order Status</Button>
                       </Link>
-                      <Button variant='danger' onClick={() => handleDelete(data.id)}>Delete Order</Button>
+                      <Button variant='danger' className='mb-2' onClick={() => handleDelete(data.id)}>Delete Order</Button>
                     </td>
                   </tr>
                 ))
