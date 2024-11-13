@@ -7,17 +7,17 @@ function DisplayAllOrder() {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/")
+    axios.get("http://localhost:5000/allOrders")
       .then(res => setOrders(res.data))
       .catch(err => console.log(err));
   }, []);
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete('http://localhost:5000/order/' + id)
+      await axios.delete('http://localhost:5000/orders/' + id)
 
       //Re-fetch the updated orders without reloading the whole page.
-      const updatedOrders = await axios.get('http://localhost:5000/orders');
+      const updatedOrders = await axios.get('http://localhost:5000/allOrders');
       setOrders(updatedOrders.data); //Update state to trigger re-render
     }
     catch (error) {
@@ -50,10 +50,10 @@ function DisplayAllOrder() {
               {
                 orders.map((data, i) => (
                   <tr key={i}>
-                    <td>{data.objectID}</td>
-                    <td>{data.Status}</td>
-                    <td>{data.OrderDetails}</td>
-                    <td>{data.AdditionalRequest}</td>
+                    <td>{data.id}</td>
+                    <td>{data.status}</td>
+                    <td>{data.details}</td>
+                    <td>{data.additionalreq}</td>
                     <td>
                       <Link to={`updateOrderDetails/${data.id}`}>
                       <Button variant='warning'> Update Order</Button>
@@ -61,7 +61,7 @@ function DisplayAllOrder() {
                       <Link to={`updateOrderStatus/${data.id}`}>
                       <Button>Update Order Status</Button>
                       </Link>
-                      <Button variant='danger' onClick={() => handleDelete(data.objectID)}>Delete Order</Button>
+                      <Button variant='danger' onClick={() => handleDelete(data.id)}>Delete Order</Button>
                     </td>
                   </tr>
                 ))
