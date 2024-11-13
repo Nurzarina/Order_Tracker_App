@@ -14,12 +14,22 @@ function DisplayAllOrder() {
 
     // Function to handle when user click Update Order Status button.
   const handleStatusUpdate = async (id) => {
-
+    try{
+      // Call modal to update status
+    }
+    catch (error) {
+      console.log('Error updating order status', error)
+    }
   };
 
     // Function to handle when user click Update Order button.
   const handleOrderDetailsUpdate = async (id) => {
-
+    try{
+      // Call modal to update details
+    }
+    catch (error){
+      console.log('Error updating order details', error)
+    }
   };
 
   // Function to handle when user click Delete Order button.
@@ -61,12 +71,12 @@ function DisplayAllOrder() {
                     <td>{data.details}</td>
                     <td>{data.additionalreq}</td>
                     <td>
-                      <Link to={`updateOrderDetails/${data.id}`}>
-                      <Button variant='warning' className='mb-2 mt-2'> Update Order</Button>
-                      </Link>
-                      <Link to={`updateOrderStatus/${data.id}`}>
-                      <Button className='mb-2'>Update Order Status</Button>
-                      </Link>
+                      {/* <Link to={`updateOrderDetails/${data.id}`}> */}
+                      <Button variant='warning' className='mb-2 mt-2' onClick={() => handleOrderDetailsUpdate(data.id)}> Update Order</Button>
+                      {/* </Link> */}
+                      {/* <Link to={`updateOrderStatus/${data.id}`}> */}
+                      <Button className='mb-2' onClick={() => {handleStatusUpdate(data.id)}}>Update Order Status</Button>
+                      {/* </Link> */}
                       <Button variant='danger' className='mb-2' onClick={() => handleDelete(data.id)}>Delete Order</Button>
                     </td>
                   </tr>
