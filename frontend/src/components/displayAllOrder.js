@@ -12,6 +12,17 @@ function DisplayAllOrder() {
       .catch(err => console.log(err));
   }, []);
 
+    // Function to handle when user click Update Order Status button.
+  const handleStatusUpdate = async (id) => {
+
+  };
+
+    // Function to handle when user click Update Order button.
+  const handleOrderDetailsUpdate = async (id) => {
+
+  };
+
+  // Function to handle when user click Delete Order button.
   const handleDelete = async (id) => {
     try {
       await axios.delete('http://localhost:5000/orders/' + id)
