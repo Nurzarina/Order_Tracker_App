@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, Card, Container, Table } from 'react-bootstrap';
+import { Button, Card, Container, Table} from 'react-bootstrap';
+import UpdateStatusModal from './modals/updateStatusModal';
+import UpdateOrderModal from './modals/updateOrderModal';
 import { Link } from 'react-router-dom';
 
 function DisplayAllOrder() {
@@ -16,6 +18,7 @@ function DisplayAllOrder() {
   const handleStatusUpdate = async (id) => {
     try{
       // Call modal to update status
+      <UpdateStatusModal/>
     }
     catch (error) {
       console.log('Error updating order status', error)
@@ -26,6 +29,7 @@ function DisplayAllOrder() {
   const handleOrderDetailsUpdate = async (id) => {
     try{
       // Call modal to update details
+      <UpdateOrderModal/>
     }
     catch (error){
       console.log('Error updating order details', error)
