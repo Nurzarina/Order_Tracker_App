@@ -1,6 +1,6 @@
 import React from 'react'
 
-function UpdateOrderModal() {
+function UpdateOrderModal({orderID}) {
   return (
     <div>updateOrderModel</div>
   )

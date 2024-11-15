@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 
-function UpdateStatusModal() {
+function UpdateStatusModal({orderID}) {
     return (
         <div
             className="modal show"
