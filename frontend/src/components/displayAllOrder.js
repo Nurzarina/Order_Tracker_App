@@ -96,6 +96,9 @@ function DisplayAllOrder() {
         </Card.Body>
       </Card>
 
+{/* Make modal appear only when selectedOrder is truthy*/}
+{selectedOrder && (
+  <>
       {/* Send props to updateStatusModal */}
       <UpdateStatusModal
         show={updateStatusModalShow}
@@ -108,7 +111,11 @@ function DisplayAllOrder() {
         show={updateDetailsModalShow}
         handleClose={() => setUpdateDetailsModalShow(false)}
         orderID={data.id}
+        orderDetails={data.details}
+        addReq={data.additionalreq}
       />
+  </>
+)}
 
     </Container>
   );
