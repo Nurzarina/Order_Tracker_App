@@ -16,8 +16,8 @@ function App() {
             <Route path='/' element={<OrderDashboard />} />            
             <Route path='/createOrder' element={<AddOrder />} />            
             <Route path='/allOrders' element={<DisplayAllOrder />} />            
-            <Route path='/updateOrderDetails' element={<updateOrderDetails/>} />            
-            <Route path='/updateOrderStatus' element={<updateOrderStatus/>} />            
+            {/* <Route path='/updateOrderDetails' element={<updateOrderDetails/>} />             */}
+            {/* <Route path='/updateOrderStatus' element={<updateOrderStatus/>} />             */}
           </Routes>
         </BrowserRouter>
     </div>
