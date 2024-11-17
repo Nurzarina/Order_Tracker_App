@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 function DisplayAllOrder() {
   const [orders, setOrders] = useState([]);
-  const [selectedOrder, setSelectedOrder] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);              // Initializing as null to ensure proper state initialization and prevent pre-populated data when component renders.
   const [updateDetailsModalShow, setUpdateDetailsModalShow] = useState(false);
   const [updateStatusModalShow, setUpdateStatusModalShow] = useState(false);
 
@@ -16,12 +16,12 @@ function DisplayAllOrder() {
       .then(res => setOrders(res.data))
       .catch(err => console.log(err));
 
-    console.log("updateDetailsModalShow: ", setUpdateDetailsModalShow)
   }, []);
 
   // Function to handle when user click Update Order Status button.
   const handleStatusUpdate = async (data) => {
     try {
+      console.log("Opening Status Modal for: ", data);
       // Show modal to update status
       setUpdateStatusModalShow(true);
       setSelectedOrder(data);
@@ -34,6 +34,7 @@ function DisplayAllOrder() {
   // Function to handle when user click Update Order button.
   const handleOrderDetailsUpdate = async (data) => {
     try {
+      console.log("Opening Update Details model for: ", data);
       // Show modal to update details
       setUpdateDetailsModalShow(true);
       setSelectedOrder(data);
