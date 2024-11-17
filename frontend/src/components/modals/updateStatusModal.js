@@ -9,11 +9,11 @@ function UpdateStatusModal({orderID}) {
         >
             <Modal.Dialog>
                 <Modal.Header closeButton>
-                    <Modal.Title>Update Order Status for Order ID </Modal.Title>
+                    <Modal.Title>Updating Order Status for Order ID </Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    
+                 
                 </Modal.Body>
             </Modal.Dialog>
 

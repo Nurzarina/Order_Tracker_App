@@ -8,13 +8,15 @@ import { Link } from 'react-router-dom';
 function DisplayAllOrder() {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState([]);
-  const [updateDetailsModalShow, setUpdateDetailsModalShow] = useState([]);
-  const [updateStatusModalShow, setUpdateStatusModalShow] = useState([]);
+  const [updateDetailsModalShow, setUpdateDetailsModalShow] = useState(false);
+  const [updateStatusModalShow, setUpdateStatusModalShow] = useState(false);
 
   useEffect(() => {
     axios.get("http://localhost:5000/allOrders")
       .then(res => setOrders(res.data))
       .catch(err => console.log(err));
+
+    console.log("updateDetailsModalShow: ", setUpdateDetailsModalShow)
   }, []);
 
   // Function to handle when user click Update Order Status button.
@@ -74,19 +76,19 @@ function DisplayAllOrder() {
             <tbody>
               {
                 orders.map((data, i) => (
-                  <tr key={i}>
+                  <tr key={data.id}>
                     <td>{data.id}</td>
                     <td>{data.status}</td>
                     <td>{data.details}</td>
                     <td>{data.additionalreq}</td>
                     <td>
                       {/* <Link to={`updateOrderDetails/${data.id}`}> */}
-                      <Button variant='warning' className='mb-2 mt-2' onClick={() => handleOrderDetailsUpdate(data.id)}> Update Order</Button>
+                      <Button variant='warning' className='mb-2 mt-2' onClick={() => handleOrderDetailsUpdate(data)}> Update Order</Button>
                       {/* </Link> */}
                       {/* <Link to={`updateOrderStatus/${data.id}`}> */}
-                      <Button className='mb-2' onClick={() => { handleStatusUpdate(data.id) }}>Update Order Status</Button>
+                      <Button className='mb-2' onClick={() => { handleStatusUpdate(data) }}>Update Order Status</Button>
                       {/* </Link> */}
-                      <Button variant='danger' className='mb-2' onClick={() => handleDelete(data.id)}>Delete Order</Button>
+                      <Button variant='danger' className='mb-2' onClick={() => handleDelete(data)}>Delete Order</Button>
                     </td>
                   </tr>
                 ))
@@ -96,26 +98,26 @@ function DisplayAllOrder() {
         </Card.Body>
       </Card>
 
-{/* Make modal appear only when selectedOrder is truthy*/}
-{selectedOrder && (
-  <>
-      {/* Send props to updateStatusModal */}
-      <UpdateStatusModal
+      {/* Make modal appear only when selectedOrder is truthy*/}
+      {updateStatusModalShow && selectedOrder && (
+        // Send props from selectedOrder to updateStatusModal
+        < UpdateStatusModal
         show={updateStatusModalShow}
         handleClose={() => setUpdateStatusModalShow(false)}
-        orderID={data.id}
+        orderID={selectedOrder.id}
       />
+      )}
 
-      {/* Send props to updateOrderDetailsModal */}
-      <UpdateOrderModal
+      {updateDetailsModalShow && selectedOrder && (
+        // Send props from selectedOrder to updateOrderDetailsModal
+        < UpdateOrderModal
         show={updateDetailsModalShow}
         handleClose={() => setUpdateDetailsModalShow(false)}
-        orderID={data.id}
-        orderDetails={data.details}
-        addReq={data.additionalreq}
+        orderID={selectedOrder.id}
+        orderDetails={selectedOrder.details}
+        addReq={selectedOrder.additionalreq}
       />
-  </>
-)}
+      )}
 
     </Container>
   );
